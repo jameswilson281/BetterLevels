@@ -7,6 +7,7 @@ package me.monstuhs.betterleveling;
 import me.monstuhs.betterleveling.EventHandlers.CombatListeners;
 import me.monstuhs.betterleveling.EventHandlers.MiningListeners;
 import me.monstuhs.betterleveling.Managers.ConfigurationManager;
+import me.monstuhs.betterleveling.Managers.MiningManager;
 import me.monstuhs.betterleveling.Managers.PlayerLevelManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -19,6 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class BetterLeveling extends JavaPlugin {
     public static ConfigurationManager ConfigManager;
     public static PlayerLevelManager PlayerLvlManager;
+    public static MiningManager MiningManager;
     
     private static PluginManager _pluginManager = Bukkit.getPluginManager();;
     
@@ -28,10 +30,10 @@ public class BetterLeveling extends JavaPlugin {
     }
     
     @Override
-    public void onEnable() {
-        
+    public void onEnable() {        
         ConfigManager = new ConfigurationManager(this);
         PlayerLvlManager = new PlayerLevelManager();
+        MiningManager = new MiningManager();
         
         _pluginManager.registerEvents(new MiningListeners(), this);
         _pluginManager.registerEvents(new CombatListeners(), this);

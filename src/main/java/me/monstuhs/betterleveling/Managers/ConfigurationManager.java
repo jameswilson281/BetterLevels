@@ -20,7 +20,7 @@ public class ConfigurationManager {
     /**
      * @return the _configFile
      */
-    public static FileConfiguration getConfigFile() {
+    public FileConfiguration getConfigFile() {
         return _configFile;
     }
     
