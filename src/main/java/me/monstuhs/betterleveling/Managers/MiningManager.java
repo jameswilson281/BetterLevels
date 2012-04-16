@@ -4,14 +4,10 @@
  */
 package me.monstuhs.betterleveling.Managers;
 
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Random;
 import me.monstuhs.betterleveling.BetterLeveling;
-import me.monstuhs.betterleveling.Managers.Models.DamagedBlock;
 import me.monstuhs.betterleveling.Utilities.ConfigConstants;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockDamageEvent;
 
 /**
  *
@@ -19,48 +15,21 @@ import org.bukkit.event.block.BlockDamageEvent;
  */
 public class MiningManager {
     
-    private static HashMap<Integer, DamagedBlock>  _blockDamageTracker;
-    private static int _percentageIncreasePerLevel = 0;
+    private static int _chanceToBreakPerLevel = 0;
+    private static int _chanceToDoubleDropPerLevel = 0;
     
-    public MiningManager(){
-        _blockDamageTracker = new HashMap<Integer,DamagedBlock>();
-        _percentageIncreasePerLevel = BetterLeveling.ConfigManager.getConfigFile().getInt(ConfigConstants.ACTIVITY_MINING_PERCENTAGE_INCREASE_PER_LEVEL);
-    }    
-    
-    public static int getExtraSwingsForMining(BlockDamageEvent miningEvent){        
-        
-        Block thisBlock = miningEvent.getBlock();
-        Player miner = miningEvent.getPlayer();
-        int blockHash = thisBlock.hashCode();       
-        int playerHash = miner.hashCode();
-        
-        if(_blockDamageTracker.containsKey(playerHash) == false || 
-           _blockDamageTracker.get(playerHash).Id != blockHash){
-            _blockDamageTracker.put(blockHash, new DamagedBlock(blockHash));
-        }
-        
-        
-        
-        DamagedBlock damagedBlock = _blockDamageTracker.get(blockHash);
-        damagedBlock.PercentToNextExtraSwing += getAdditionalMiningDamage(miner);        
-        
-        
-        int extraSwings = damagedBlock.PercentToNextExtraSwing / 100;
-        
-        if(damagedBlock.PercentToNextExtraSwing >= 100){
-            damagedBlock.PercentToNextExtraSwing = 0;        
-        }
-        
-        return extraSwings;
+    public MiningManager(){        
+        _chanceToBreakPerLevel = BetterLeveling.ConfigManager.getConfigFile().getInt(ConfigConstants.MiningActivities.ACTIVITY_MINING_PpL_INSTABREAK);
+        _chanceToDoubleDropPerLevel = BetterLeveling.ConfigManager.getConfigFile().getInt(ConfigConstants.MiningActivities.ACTIVITY_MINING_PpL_DOUBLE_DROP);
     }
     
-    public static void removeBlockFromDamageTracker(Block block){
-        //We need to remove this block from ALL player lists not just one player
-        _blockDamageTracker.values().removeAll(Collections.singleton(block.hashCode()));
+    public static boolean getDoubleDropForPlayer(Player miner){
+        Random rand = new Random();
+        return rand.nextInt(100) <= (miner.getLevel() * _chanceToDoubleDropPerLevel);
     }
     
-    private static int getAdditionalMiningDamage(Player miner){
-        return miner.getLevel() * _percentageIncreasePerLevel;
-        
+    public static boolean getInstaBreakForPlayer(Player miner){
+        Random rand = new Random();
+        return rand.nextInt(100) <= (miner.getLevel() * _chanceToBreakPerLevel);
     }
 }

@@ -9,6 +9,25 @@ package me.monstuhs.betterleveling.Utilities;
  * @author James
  */
 public class ConfigConstants {
-    public static final String ACTIVITY_MINING_PERCENTAGE_INCREASE_PER_LEVEL = "activity.mining.PercentageIncreasePerLevel";
-    public static final String ACTIVITY_COMBAT_DODGE_CHANCE_PER_LEVEL = "activity.combat.ChanceToDodgePerLevel";
+
+    public class MiningActivities {
+
+        public static final String ACTIVITY_MINING_PpL_INSTABREAK = "activity.mining.PercentageChancePerLevelToInstaBreak";
+        public static final String ACTIVITY_MINING_PpL_DOUBLE_DROP = "activity.mining.PercentageChancePerLevelToDoubleDrop";
+    }
+
+    public class CombatActivities {
+
+        public static final String ACTIVITY_COMBAT_PpL_DODGE = "activity.combat.PercentageChancePerLevelToDodge";
+        public static final String ACTIVITY_COMBAT_PpL_CRIT = "activity.combat.PercentageChancePerLevelToCrit";        
+    }
+    
+    public class GlobalSettings {
+        
+        public static final String SETTINGS_COMBAT_DODGE_MODIFIER = "settings.combat.PercentageDamageFromDodge";
+        public static final String SETTINGS_COMBAT_CRIT_MODIFIER = "settings.combat.PercentageDamageFromCrit";
+        public static final String SETTINGS_COMBAT_HEADSHOT_MODIFIER = "settings.combat.PercentageDamageFromHeadshot";
+        public static final String SETTINGS_COMBAT_MAX_CRIT_CHANCE = "settings.combat.MaximumChanceForCrit";
+        public static final String SETTINGS_COMBAT_MAX_DODGE_CHANCE = "settings.combat.MaximumChanceForDodge";
+    }
 }

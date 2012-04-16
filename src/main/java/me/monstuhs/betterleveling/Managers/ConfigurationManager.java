@@ -32,10 +32,20 @@ public class ConfigurationManager {
     
     private void createOrLoadConfig() {
         PlugginLogging.WriteMessageToConsole("Creating/loading config");        
-        getConfigFile().options().copyDefaults(true);        
+        _configFile.options().copyDefaults(true);        
 
-        getConfigFile().addDefault(ConfigConstants.ACTIVITY_MINING_PERCENTAGE_INCREASE_PER_LEVEL, 5);
-        getConfigFile().addDefault(ConfigConstants.ACTIVITY_COMBAT_DODGE_CHANCE_PER_LEVEL, 2);
+        _configFile.addDefault(ConfigConstants.MiningActivities.ACTIVITY_MINING_PpL_DOUBLE_DROP, 1);
+        _configFile.addDefault(ConfigConstants.MiningActivities.ACTIVITY_MINING_PpL_INSTABREAK, 1);
+        
+        _configFile.addDefault(ConfigConstants.CombatActivities.ACTIVITY_COMBAT_PpL_DODGE, 2);
+        _configFile.addDefault(ConfigConstants.CombatActivities.ACTIVITY_COMBAT_PpL_CRIT, 2);
+        
+        _configFile.addDefault(ConfigConstants.GlobalSettings.SETTINGS_COMBAT_DODGE_MODIFIER, 75);
+        _configFile.addDefault(ConfigConstants.GlobalSettings.SETTINGS_COMBAT_CRIT_MODIFIER, 200);
+        _configFile.addDefault(ConfigConstants.GlobalSettings.SETTINGS_COMBAT_HEADSHOT_MODIFIER, 200);
+        _configFile.addDefault(ConfigConstants.GlobalSettings.SETTINGS_COMBAT_MAX_CRIT_CHANCE, 75);
+        _configFile.addDefault(ConfigConstants.GlobalSettings.SETTINGS_COMBAT_MAX_DODGE_CHANCE, 75);
+        
         
         _plugin.saveConfig();
     }
