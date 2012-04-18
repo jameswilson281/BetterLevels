@@ -22,8 +22,14 @@ public class ConfigConstants {
         public static final String ACTIVITY_COMBAT_PpL_CRIT = "activity.combat.PercentageChancePerLevelToCrit";        
     }
     
+    public class PassiveActivities {
+        public static final String ACTIVITY_PASSIVE_REGEN_HH_PER_LEVEL = "activity.passive.regeneration.HalfheartsPerLevel";
+        public static final String ACTIVITY_PASSIVE_REGEN_DELAY = "activity.passive.regeneration.RegenIntervalInSeconds";
+    }
+    
     public class GlobalSettings {
         
+        public static final String WORLD_NAME = "settings.WorldName";
         public static final String SETTINGS_COMBAT_DODGE_MODIFIER = "settings.combat.PercentageDamageFromDodge";
         public static final String SETTINGS_COMBAT_CRIT_MODIFIER = "settings.combat.PercentageDamageFromCrit";
         public static final String SETTINGS_COMBAT_HEADSHOT_MODIFIER = "settings.combat.PercentageDamageFromHeadshot";

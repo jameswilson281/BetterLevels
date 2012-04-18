@@ -32,13 +32,18 @@ public class ConfigurationManager {
     
     private void createOrLoadConfig() {
         PlugginLogging.WriteMessageToConsole("Creating/loading config");        
-        _configFile.options().copyDefaults(true);        
+        _configFile.options().copyDefaults(true);
+        
+        _configFile.addDefault(ConfigConstants.GlobalSettings.WORLD_NAME, _plugin.getServer().getWorlds().get(0).getName());
 
         _configFile.addDefault(ConfigConstants.MiningActivities.ACTIVITY_MINING_PpL_DOUBLE_DROP, 1);
         _configFile.addDefault(ConfigConstants.MiningActivities.ACTIVITY_MINING_PpL_INSTABREAK, 1);
         
         _configFile.addDefault(ConfigConstants.CombatActivities.ACTIVITY_COMBAT_PpL_DODGE, 2);
         _configFile.addDefault(ConfigConstants.CombatActivities.ACTIVITY_COMBAT_PpL_CRIT, 2);
+        
+        _configFile.addDefault(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_DELAY, 20);
+        _configFile.addDefault(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_HH_PER_LEVEL, 0.5);
         
         _configFile.addDefault(ConfigConstants.GlobalSettings.SETTINGS_COMBAT_DODGE_MODIFIER, 75);
         _configFile.addDefault(ConfigConstants.GlobalSettings.SETTINGS_COMBAT_CRIT_MODIFIER, 200);
