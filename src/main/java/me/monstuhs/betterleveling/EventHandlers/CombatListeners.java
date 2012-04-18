@@ -28,7 +28,7 @@ public class CombatListeners implements Listener {
         int damage = event.getDamage();
         
         //Check for headshot
-        if(attacker instanceof Arrow && defender instanceof LivingEntity){
+        if(attacker instanceof Arrow && ((Arrow)attacker).getShooter() instanceof Player && defender instanceof LivingEntity){
             damage = CombatManager.getDamageAfterHeadshotAttempt((Arrow)attacker, (LivingEntity)defender, damage);
             //Change attacker for subsequent checks
             attacker = ((Arrow)attacker).getShooter();
