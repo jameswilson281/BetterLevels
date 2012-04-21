@@ -3,3 +3,7 @@ version: 0.3
 main: me.monstuhs.betterleveling.BetterLeveling
 description: Factors player level into a number of Minecraft activities.
 author: monstuhs
+commands:
+   stats:
+      description: Show your currents stats
+      usage: /<command>

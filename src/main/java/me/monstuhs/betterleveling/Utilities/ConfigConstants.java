@@ -36,4 +36,8 @@ public class ConfigConstants {
         public static final String SETTINGS_COMBAT_MAX_CRIT_CHANCE = "settings.combat.MaximumChanceForCrit";
         public static final String SETTINGS_COMBAT_MAX_DODGE_CHANCE = "settings.combat.MaximumChanceForDodge";
     }
+    
+    public class Commands {
+        public static final String COMMANDS_SHOW_STATS = "stats";
+    }
 }

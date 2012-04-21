@@ -4,6 +4,7 @@
  */
 package me.monstuhs.betterleveling;
 
+import me.monstuhs.betterleveling.Commands.ShowStatsCommand;
 import me.monstuhs.betterleveling.EventHandlers.CombatListeners;
 import me.monstuhs.betterleveling.EventHandlers.MiningListeners;
 import me.monstuhs.betterleveling.Managers.CombatManager;
@@ -49,12 +50,17 @@ public class BetterLeveling extends JavaPlugin {
         
         _pluginManager.registerEvents(new MiningListeners(), this);
         _pluginManager.registerEvents(new CombatListeners(), this);
-                
+        
+        registerCommands();
         startRegenTicker();
     }
     
     public void saveConfigurationFile(){
         saveConfig();
+    }
+    
+    private void registerCommands(){
+        this.getCommand(ConfigConstants.Commands.COMMANDS_SHOW_STATS).setExecutor(new ShowStatsCommand());
     }
     
     private void startRegenTicker(){

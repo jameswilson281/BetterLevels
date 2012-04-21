@@ -28,6 +28,14 @@ public class CombatManager {
     private static double _headshotDamageModifier = 1;
     private static int _maxCritChance = 100;
     private static int _maxDodgeChance = 100;
+
+    public static int getChanceToDodgePerLevel() {
+        return _chanceToDodgePerLevel;
+    }
+
+    public static int getChanceToCritPerLevel() {
+        return _chanceToCritPerLevel;
+    }
     
 
     public CombatManager() {
@@ -45,7 +53,7 @@ public class CombatManager {
         
         int roll = new Random().nextInt(100);
         int newDamage = originalDamage;
-        boolean doesPlayerDodge = roll <= Math.min((defender.getLevel() * _chanceToDodgePerLevel), _maxDodgeChance);
+        boolean doesPlayerDodge = roll <= Math.min((defender.getLevel() * getChanceToDodgePerLevel()), _maxDodgeChance);
         if (doesPlayerDodge) {
             newDamage = (int) (originalDamage * _dodgeDamageModifier);
             defender.sendMessage(ChatColor.DARK_PURPLE + "Dodge! (" + newDamage + " / " + originalDamage + ")");            
@@ -55,7 +63,7 @@ public class CombatManager {
     
     public static int getDamageAfterCritAttempt(Player attacker, int originalDamage){
         int roll = new Random().nextInt(100);
-        boolean doesPlayerCrit =  roll <= Math.min((attacker.getLevel() * _chanceToCritPerLevel), _maxCritChance);        
+        boolean doesPlayerCrit =  roll <= Math.min((attacker.getLevel() * getChanceToCritPerLevel()), _maxCritChance);        
         if(doesPlayerCrit){
             attacker.sendMessage(ChatColor.BLUE + "Critical Hit! (x " + _critDamageModifier + ")");
             originalDamage *= _critDamageModifier;
