@@ -39,8 +39,8 @@ public class BetterLeveling extends JavaPlugin {
     
     @Override
     public void onEnable() {        
-        ConfigManager = new ConfigurationManager(this);        
-        PlayerLvlManager = new PlayerLevelManager();
+        ConfigManager = new ConfigurationManager(this);
+        PlayerLvlManager = new PlayerLevelManager(ConfigManager);
         MiningManager = new MiningManager();
         CombatManager = new CombatManager();
         
@@ -65,13 +65,8 @@ public class BetterLeveling extends JavaPlugin {
     
     private void startRegenTicker(){
         long initialDelay = BukkitHelpers.getDelay(10);
-        long repeatDelay = BukkitHelpers.getDelay(ConfigManager.getConfigFile().getLong(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_DELAY));
-        double regenPerLevel = ConfigManager.getConfigFile().getDouble(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_HH_PER_LEVEL);
-        this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new RegenerationTask(_thisWorld, regenPerLevel), initialDelay, repeatDelay);
-    }
-    
-    private void startHeartBeatTicker(){
-        long repeatDelay = BukkitHelpers.getDelay(ConfigManager.getConfigFile().getLong(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_DELAY));
-        this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new HeartBeatTask(), 20L * 3L, 20L * 3L);
+        long repeatDelay = BukkitHelpers.getDelay(ConfigManager.getConfigFile().getLong(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_DELAY));        
+        double regenRate = PlayerLvlManager.getRegenHalfHeartsPerLevel();
+        this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new RegenerationTask(_thisWorld, regenRate), initialDelay, repeatDelay);
     }
 }

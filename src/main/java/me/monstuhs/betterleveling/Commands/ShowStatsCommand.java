@@ -4,8 +4,7 @@
  */
 package me.monstuhs.betterleveling.Commands;
 
-import me.monstuhs.betterleveling.Managers.PlayerLevelManager;
-import org.bukkit.Bukkit;
+import me.monstuhs.betterleveling.BetterLeveling;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +20,7 @@ public class ShowStatsCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         
         if (sender instanceof Player){
-            PlayerLevelManager.displayPlayerStats((Player)sender);
+            BetterLeveling.PlayerLvlManager.displayPlayerStats((Player)sender);
         }
         return true;
     }

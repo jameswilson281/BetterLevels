@@ -6,6 +6,8 @@ package me.monstuhs.betterleveling.Managers;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
+import me.monstuhs.betterleveling.Utilities.BukkitHelpers;
+import me.monstuhs.betterleveling.Utilities.ConfigConstants;
 import org.bukkit.entity.Player;
 
 /**
@@ -14,16 +16,35 @@ import org.bukkit.entity.Player;
  */
 public class PlayerLevelManager {
     
-    public static void displayPlayerStats(Player player){
+    private double _regenHalfHeartsPerLevel;
+    private long _regenDelay;
+    
+    public PlayerLevelManager(ConfigurationManager configManager){
+        _regenHalfHeartsPerLevel = configManager.getConfigFile().getDouble(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_HH_PER_LEVEL);        
+        _regenDelay = configManager.getConfigFile().getLong(ConfigConstants.PassiveActivities.ACTIVITY_PASSIVE_REGEN_DELAY);
+    }
+    
+    public void displayPlayerStats(Player player){
         HashMap<String, Integer> playerStats = new HashMap<String, Integer>();
+        int playerLevel = player.getLevel();
         
-        playerStats.put("Chance to Crit:  ", CombatManager.getChanceToCritPerLevel() * player.getLevel());
-        playerStats.put("Chance to Dodge: ", CombatManager.getChanceToDodgePerLevel() * player.getLevel());
-        playerStats.put("Chance to double-drop: ", MiningManager.getChanceToDoubleDropPerLevel() * player.getLevel());
-        playerStats.put("Chance to insta-break: ", MiningManager.getChanceToBreakPerLevel() * player.getLevel());
+        playerStats.put("Chance to Crit:  ", CombatManager.getChanceToCritPerLevel() * playerLevel);
+        playerStats.put("Chance to Dodge: ", CombatManager.getChanceToDodgePerLevel() * playerLevel);        
+        playerStats.put("Chance to double-drop: ", MiningManager.getChanceToDoubleDropPerLevel() * playerLevel);
+        playerStats.put("Chance to insta-break: ", MiningManager.getChanceToBreakPerLevel() * playerLevel);
         
         for(Entry<String, Integer> stat : playerStats.entrySet()){
             player.sendMessage(stat.getKey() + stat.getValue() + "%");
         }
+        double regenPerSecond = player.getLevel() * getRegenHalfHeartsPerLevel() / _regenDelay;
+        player.sendMessage("Extra Regen: " + BukkitHelpers.formatDouble(regenPerSecond) + "/second)");
+    }
+    
+    public int getPlayerRegenAmount(Player player){
+        return (int) (player.getLevel() * getRegenHalfHeartsPerLevel());
+    }
+
+    public double getRegenHalfHeartsPerLevel() {
+        return _regenHalfHeartsPerLevel;
     }
 }
