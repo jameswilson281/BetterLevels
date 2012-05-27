@@ -4,6 +4,8 @@
  */
 package me.monstuhs.betterleveling.Runnables;
 
+import java.util.List;
+import java.util.ListIterator;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
@@ -21,9 +23,11 @@ public class RegenerationTask implements Runnable {
     }
 
     public void run() {
-        
-        
-        for (Player player : _world.getPlayers()) {            
+                
+        List<Player> iList = _world.getPlayers();
+        for(ListIterator<Player> itr = iList.listIterator(); itr.hasNext();) {
+        //for (Player player : _world.getPlayers()) {            
+            Player player = itr.next();
             int currentHealth = player.getHealth();
             if (currentHealth < player.getMaxHealth()) {
                 int amountToRegen = (int) (player.getLevel() * _regenPerLevel);

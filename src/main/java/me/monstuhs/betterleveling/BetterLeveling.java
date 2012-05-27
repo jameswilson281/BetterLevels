@@ -11,7 +11,6 @@ import me.monstuhs.betterleveling.Managers.CombatManager;
 import me.monstuhs.betterleveling.Managers.ConfigurationManager;
 import me.monstuhs.betterleveling.Managers.MiningManager;
 import me.monstuhs.betterleveling.Managers.PlayerLevelManager;
-import me.monstuhs.betterleveling.Runnables.HeartBeatTask;
 import me.monstuhs.betterleveling.Runnables.RegenerationTask;
 import me.monstuhs.betterleveling.Utilities.BukkitHelpers;
 import me.monstuhs.betterleveling.Utilities.ConfigConstants;
